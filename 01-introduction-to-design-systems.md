@@ -88,3 +88,31 @@ A template is a combination of different organisms to actually make sense togeth
 **Page**
 
 The only difference between templates and pages is the data used in it. The template has some fake data, but the page has real life data in it.
+
+---
+
+## Example design systems
+
+- [Carbon design system - IBM](https://carbondesignsystem.com/)
+- [Fluent UI - Microsoft](https://developer.microsoft.com/en-us/fluentui#/)
+
+To learn about a design system, you should have a look at the:
+
+- colors
+- accessibility guidelines
+- typography
+- icons
+- components
+- etc
+
+---
+
+## Your role as engineer in a design system
+
+Your responsibility as an engineer, would be to translate the guidelines of the design system into reusable code that can be used to create products easily.
+
+- Understanding the system
+- Extracting reusable functionality out of the system into code
+- Represent components of this design system which is reusable along products and strictly respects the guidelines
+
+---
