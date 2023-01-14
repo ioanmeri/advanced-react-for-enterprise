@@ -14,30 +14,6 @@
 /* Body text sizes */
 /* Heading font sizes */
 /* Heading font weights */
-.dse-button-container {
-  display: flex;
-  background: var(--dse-btn-primary-bg, #53ce7b);
-  color: var(--dse-btn-primary-color, #fff);
-  border: none;
-  padding: 0.25rem;
-}
-
-/* Brand colors */
-/* Neutral colors */
-/* Utility colors */
-/* Typography */
-/* Font families */
-/* Font sizes */
-/* Heading font sizes */
-/* Font weights */
-/* Breakpoints */
-/* spacing */
-/* global text colors */
-/* buttons */
-/* forms */
-/* Body text sizes */
-/* Heading font sizes */
-/* Heading font weights */
 .dse-width-xxxs {
   width: 0.25rem;
 }
@@ -109,6 +85,3 @@
 .dse-height-xxxl {
   height: 6rem;
 }
-
-
-/*# sourceMappingURL=/src.f69400ca.css.map */

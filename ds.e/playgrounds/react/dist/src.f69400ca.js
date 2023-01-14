@@ -174,6 +174,12 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
+},{"_css_loader":"../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../node_modules/@ds.e/scss/lib/Utilities.css":[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
 },{"_css_loader":"../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../node_modules/react/cjs/react.development.js":[function(require,module,exports) {
 /**
  * @license React
@@ -28920,7 +28926,27 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"../../../node_modules/react-dom/cjs/react-dom.development.js"}],"../../../node_modules/@ds.e/react/lib/atoms/Button/Button.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"../../../node_modules/react-dom/cjs/react-dom.development.js"}],"../../../node_modules/@ds.e/react/lib/foundation/Spacing.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+const spaces = {
+  xxxs: "xxxs",
+  xxs: "xxs",
+  xs: "xs",
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+  xxl: "xxl",
+  xxxl: "xxxl"
+};
+var Spacing = Object.freeze(spaces);
+exports.default = Spacing;
+},{}],"../../../node_modules/@ds.e/react/lib/atoms/Color/Color.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28928,41 +28954,56 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
+var _Spacing = _interopRequireDefault(require("../../foundation/Spacing.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const Button = ({
-  label
+const Color = ({
+  hexCode,
+  width = _Spacing.default.sm,
+  height = _Spacing.default.sm
 }) => {
-  return _react.default.createElement("button", {
-    className: "dse-button-container"
-  }, label || "Button");
+  const className = `dse-width-${width} dse-height-${height}`;
+  return _react.default.createElement("div", {
+    className: className,
+    style: {
+      backgroundColor: hexCode
+    }
+  });
 };
-exports.default = Button;
-},{"react":"../../../node_modules/react/index.js"}],"../../../node_modules/@ds.e/react/lib/index.js":[function(require,module,exports) {
+exports.default = Color;
+},{"react":"../../../node_modules/react/index.js","../../foundation/Spacing.js":"../../../node_modules/@ds.e/react/lib/foundation/Spacing.js"}],"../../../node_modules/@ds.e/react/lib/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "Button", {
+Object.defineProperty(exports, "Color", {
   enumerable: true,
   get: function () {
-    return _Button.default;
+    return _Color.default;
   }
 });
-var _Button = _interopRequireDefault(require("./atoms/Button/Button.js"));
+Object.defineProperty(exports, "Spacing", {
+  enumerable: true,
+  get: function () {
+    return _Spacing.default;
+  }
+});
+var _Color = _interopRequireDefault(require("./atoms/Color/Color.js"));
+var _Spacing = _interopRequireDefault(require("./foundation/Spacing.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./atoms/Button/Button.js":"../../../node_modules/@ds.e/react/lib/atoms/Button/Button.js"}],"index.tsx":[function(require,module,exports) {
+},{"./atoms/Color/Color.js":"../../../node_modules/@ds.e/react/lib/atoms/Color/Color.js","./foundation/Spacing.js":"../../../node_modules/@ds.e/react/lib/foundation/Spacing.js"}],"index.tsx":[function(require,module,exports) {
 "use strict";
 
 require("@ds.e/scss/lib/Button.css");
+require("@ds.e/scss/lib/Utilities.css");
 var _react = _interopRequireDefault(require("react"));
 var _reactDom = _interopRequireDefault(require("react-dom"));
 var _react2 = require("@ds.e/react");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-_reactDom.default.render(_react.default.createElement(_react2.Button, {
-  label: "Example Button"
+_reactDom.default.render(_react.default.createElement(_react2.Color, {
+  hexCode: "#000"
 }), document.querySelector("#root"));
-},{"@ds.e/scss/lib/Button.css":"../../../node_modules/@ds.e/scss/lib/Button.css","react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","@ds.e/react":"../../../node_modules/@ds.e/react/lib/index.js"}],"../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"@ds.e/scss/lib/Button.css":"../../../node_modules/@ds.e/scss/lib/Button.css","@ds.e/scss/lib/Utilities.css":"../../../node_modules/@ds.e/scss/lib/Utilities.css","react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","@ds.e/react":"../../../node_modules/@ds.e/react/lib/index.js"}],"../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
