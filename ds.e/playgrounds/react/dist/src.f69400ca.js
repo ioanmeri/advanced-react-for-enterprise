@@ -29144,6 +29144,7 @@ const Select = ({
     className: "dse-select__overlay"
   }, options.map((option, optionIndex) => {
     return _react.default.createElement("li", {
+      className: "dse-select__option",
       onClick: () => onOptionSelected(option, optionIndex),
       key: option.value
     }, option.label);
@@ -29208,7 +29209,11 @@ var options = [{
   label: "Sweet Pink",
   value: "pink"
 }];
-_reactDom.default.render(_react.default.createElement("div", null, _react.default.createElement(_react2.Select, {
+_reactDom.default.render(_react.default.createElement("div", {
+  style: {
+    padding: "40px"
+  }
+}, _react.default.createElement(_react2.Select, {
   options: options
 })), document.querySelector("#root"));
 // <Select label='Please select a size' onOptionSelected={console.log}  options={[{label: '', value: ''}]} />
@@ -29237,7 +29242,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42267" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42559" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

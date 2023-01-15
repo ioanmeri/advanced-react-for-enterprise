@@ -21,7 +21,7 @@ const Select = ({ options = [], label = "Please select an option", onOptionSelec
             React.createElement("svg", { className: `dse-select__caret ${isOpen ? "dse-select__caret--open" : "dse-select__caret--closed"}`, width: "1rem", height: "1rem", fill: "none", strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, viewBox: "0 0 24 24", stroke: "currentColor" },
                 React.createElement("path", { d: "M19 9l-7 7-7-7" }))),
         isOpen ? (React.createElement("ul", { style: { top: overlayTop }, className: "dse-select__overlay" }, options.map((option, optionIndex) => {
-            return (React.createElement("li", { onClick: () => onOptionSelected(option, optionIndex), key: option.value }, option.label));
+            return (React.createElement("li", { className: "dse-select__option", onClick: () => onOptionSelected(option, optionIndex), key: option.value }, option.label));
         }))) : null));
 };
 
