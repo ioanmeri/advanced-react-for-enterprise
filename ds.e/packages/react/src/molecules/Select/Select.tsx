@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface SelectOption {
   label: string;
@@ -17,8 +17,10 @@ const Select: React.FunctionComponent<SelectProps> = ({
   onOptionSelected: handler,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const labelRef = useRef<HTMLButtonElement>(null);
+  const [overlayTop, setOverlayTop] = useState<number>(0);
+
   const onOptionSelected = (option: SelectOption, optionIndex: number) => {
-    setIsOpen(!isOpen);
     if (handler) {
       handler(option, optionIndex);
     }
@@ -28,11 +30,36 @@ const Select: React.FunctionComponent<SelectProps> = ({
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    setOverlayTop((labelRef.current?.offsetHeight || 0) + 10);
+  }, [labelRef.current?.offsetHeight]);
+
   return (
-    <div>
-      <button onClick={() => onLabelClick()}>{label}</button>
+    <div className="dse-select">
+      <button
+        ref={labelRef}
+        className="dse-select__label"
+        onClick={() => onLabelClick()}
+      >
+        <span>{label}</span>
+        <svg
+          className={`dse-select__caret ${
+            isOpen ? "dse-select__caret--open" : "dse-select__caret--closed"
+          }`}
+          width="1rem"
+          height="1rem"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
       {isOpen ? (
-        <ul>
+        <ul style={{ top: overlayTop }} className="dse-select__overlay">
           {options.map((option, optionIndex) => {
             return (
               <li

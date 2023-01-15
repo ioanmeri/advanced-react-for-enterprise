@@ -16,6 +16,10 @@
   }
 }
 
-// @include margin-top('xxxs');
-// @include margin-left('xxxs');
-// @include padding-left('xxxs');
+@mixin padding($space) {
+  padding: map-get($spacing, $key: $space);
+}
+
+@mixin margin($space) {
+  margin: map-get($spacing, $key: $space);
+}

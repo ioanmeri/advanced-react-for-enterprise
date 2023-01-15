@@ -25,6 +25,8 @@ $blue-light: #b4d2f4;
 $playfair: "Playfair", serif;
 $raleway: "Raleway", "HelveticaNeue", "Helvetica", sans-serif;
 
+$body-font-family: $playfair;
+
 /* Font sizes */
 $fs-xs: 0.75rem; // 12px
 $fs-sm: 0.875rem; // 14px
@@ -93,3 +95,7 @@ $fs: (
   xl: 1.5rem,
   // 24px
 ) !default;
+
+$shadows: (
+  base: 0px 4px 11px rgba(157, 157, 157, 0.21),
+);

@@ -198,6 +198,12 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
+},{"_css_loader":"../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../node_modules/@ds.e/scss/lib/Select.css":[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
 },{"_css_loader":"../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../node_modules/react/cjs/react.development.js":[function(require,module,exports) {
 /**
  * @license React
@@ -29100,8 +29106,9 @@ const Select = ({
   onOptionSelected: handler
 }) => {
   const [isOpen, setIsOpen] = (0, _react.useState)(false);
+  const labelRef = (0, _react.useRef)(null);
+  const [overlayTop, setOverlayTop] = (0, _react.useState)(0);
   const onOptionSelected = (option, optionIndex) => {
-    setIsOpen(!isOpen);
     if (handler) {
       handler(option, optionIndex);
     }
@@ -29109,9 +29116,33 @@ const Select = ({
   const onLabelClick = () => {
     setIsOpen(!isOpen);
   };
-  return _react.default.createElement("div", null, _react.default.createElement("button", {
+  (0, _react.useEffect)(() => {
+    setOverlayTop((labelRef.current?.offsetHeight || 0) + 10);
+  }, [labelRef.current?.offsetHeight]);
+  return _react.default.createElement("div", {
+    className: "dse-select"
+  }, _react.default.createElement("button", {
+    ref: labelRef,
+    className: "dse-select__label",
     onClick: () => onLabelClick()
-  }, label), isOpen ? _react.default.createElement("ul", null, options.map((option, optionIndex) => {
+  }, _react.default.createElement("span", null, label), _react.default.createElement("svg", {
+    className: `dse-select__caret ${isOpen ? "dse-select__caret--open" : "dse-select__caret--closed"}`,
+    width: "1rem",
+    height: "1rem",
+    fill: "none",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    viewBox: "0 0 24 24",
+    stroke: "currentColor"
+  }, _react.default.createElement("path", {
+    d: "M19 9l-7 7-7-7"
+  }))), isOpen ? _react.default.createElement("ul", {
+    style: {
+      top: overlayTop
+    },
+    className: "dse-select__overlay"
+  }, options.map((option, optionIndex) => {
     return _react.default.createElement("li", {
       onClick: () => onOptionSelected(option, optionIndex),
       key: option.value
@@ -29162,6 +29193,7 @@ require("@ds.e/scss/lib/Utilities.css");
 require("@ds.e/scss/lib/global.css");
 require("@ds.e/scss/lib/Margin.css");
 require("@ds.e/scss/lib/Text.css");
+require("@ds.e/scss/lib/Select.css");
 var _react = _interopRequireDefault(require("react"));
 var _reactDom = _interopRequireDefault(require("react-dom"));
 var _react2 = require("@ds.e/react");
@@ -29180,7 +29212,7 @@ _reactDom.default.render(_react.default.createElement("div", null, _react.defaul
   options: options
 })), document.querySelector("#root"));
 // <Select label='Please select a size' onOptionSelected={console.log}  options={[{label: '', value: ''}]} />
-},{"@ds.e/scss/lib/Button.css":"../../../node_modules/@ds.e/scss/lib/Button.css","@ds.e/scss/lib/Utilities.css":"../../../node_modules/@ds.e/scss/lib/Utilities.css","@ds.e/scss/lib/global.css":"../../../node_modules/@ds.e/scss/lib/global.css","@ds.e/scss/lib/Margin.css":"../../../node_modules/@ds.e/scss/lib/Margin.css","@ds.e/scss/lib/Text.css":"../../../node_modules/@ds.e/scss/lib/Text.css","react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","@ds.e/react":"../../../node_modules/@ds.e/react/lib/index.js"}],"../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"@ds.e/scss/lib/Button.css":"../../../node_modules/@ds.e/scss/lib/Button.css","@ds.e/scss/lib/Utilities.css":"../../../node_modules/@ds.e/scss/lib/Utilities.css","@ds.e/scss/lib/global.css":"../../../node_modules/@ds.e/scss/lib/global.css","@ds.e/scss/lib/Margin.css":"../../../node_modules/@ds.e/scss/lib/Margin.css","@ds.e/scss/lib/Text.css":"../../../node_modules/@ds.e/scss/lib/Text.css","@ds.e/scss/lib/Select.css":"../../../node_modules/@ds.e/scss/lib/Select.css","react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","@ds.e/react":"../../../node_modules/@ds.e/react/lib/index.js"}],"../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29205,7 +29237,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39279" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42267" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
