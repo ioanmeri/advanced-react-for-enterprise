@@ -61,6 +61,7 @@ $breakpoints: (
 
 /* spacing */
 $spacing: (
+  none: 0rem,
   xxxs: 0.25rem,
   //4px
   xxs: 0.5rem,
@@ -78,4 +79,17 @@ $spacing: (
   xxl: 4.5rem,
   // 72px
   xxxl: 6rem,
+) !default;
+
+$fs: (
+  xs: 0.75rem,
+  // 12px
+  sm: 0.875rem,
+  // 14px
+  base: 1rem,
+  //16px
+  lg: 1.125rem,
+  // 18px
+  xl: 1.5rem,
+  // 24px
 ) !default;

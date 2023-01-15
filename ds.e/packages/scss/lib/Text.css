@@ -1,0 +1,39 @@
+/* Brand colors */
+/* Neutral colors */
+/* Utility colors */
+/* Typography */
+/* Font families */
+/* Font sizes */
+/* Heading font sizes */
+/* Font weights */
+/* Breakpoints */
+/* spacing */
+/* global text colors */
+/* buttons */
+/* forms */
+/* Body text sizes */
+/* Heading font sizes */
+/* Heading font weights */
+.dse-text {
+  margin: 0;
+}
+
+.dse-text-xs {
+  font-size: 0.75rem;
+}
+
+.dse-text-sm {
+  font-size: 0.875rem;
+}
+
+.dse-text-base {
+  font-size: 1rem;
+}
+
+.dse-text-lg {
+  font-size: 1.125rem;
+}
+
+.dse-text-xl {
+  font-size: 1.5rem;
+}
