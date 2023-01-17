@@ -19,6 +19,18 @@ const options = [
 ReactDOM.render(
   <div style={{ padding: "40px" }}>
     <Select options={options} />
+    {/* <Select
+      options={options}
+      renderOption={({ option, getOptionRecommendedProps }) => (
+        <p
+          {...getOptionRecommendedProps({
+            className: "custom",
+          })}
+        >
+          {option.label}
+        </p>
+      )}
+    /> */}
   </div>,
   document.querySelector("#root")
 );

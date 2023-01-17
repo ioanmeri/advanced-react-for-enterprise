@@ -29105,7 +29105,8 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 const Select = ({
   options = [],
   label = "Please select an option",
-  onOptionSelected: handler
+  onOptionSelected: handler,
+  renderOption
 }) => {
   const [isOpen, setIsOpen] = (0, _react.useState)(false);
   const [selectedIndex, setSelectedIndex] = (0, _react.useState)(null);
@@ -29153,6 +29154,21 @@ const Select = ({
     className: "dse-select__overlay"
   }, options.map((option, optionIndex) => {
     const isSelected = selectedIndex === optionIndex;
+    const renderOptionProps = {
+      option,
+      isSelected,
+      getOptionRecommendedProps: (overrideProps = {}) => {
+        return {
+          className: `dse-select__option ${isSelected ? "dse-select__option--selected" : ""}`,
+          key: option.value,
+          onClick: () => onOptionSelected(option, optionIndex),
+          ...overrideProps
+        };
+      }
+    };
+    if (renderOption) {
+      return renderOption(renderOptionProps);
+    }
     return _react.default.createElement("li", {
       className: `dse-select__option ${isSelected ? "dse-select__option--selected" : ""}`,
       onClick: () => onOptionSelected(option, optionIndex),
