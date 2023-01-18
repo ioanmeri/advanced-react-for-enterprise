@@ -29132,6 +29132,9 @@ const Select = ({
   return _react.default.createElement("div", {
     className: "dse-select"
   }, _react.default.createElement("button", {
+    "aria-controls": "dse-select-list",
+    "aria-haspopup": true,
+    "aria-expanded": isOpen ? true : undefined,
     ref: labelRef,
     className: "dse-select__label",
     onClick: () => onLabelClick()
@@ -29148,6 +29151,9 @@ const Select = ({
   }, _react.default.createElement("path", {
     d: "M19 9l-7 7-7-7"
   }))), isOpen ? _react.default.createElement("ul", {
+    role: "menu",
+    "aria-hidden": isOpen ? undefined : false,
+    id: "dse-select-list",
     style: {
       top: overlayTop
     },

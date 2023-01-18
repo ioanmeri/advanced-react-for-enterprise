@@ -56,6 +56,9 @@ const Select: React.FunctionComponent<SelectProps> = ({
   return (
     <div className="dse-select">
       <button
+        aria-controls="dse-select-list"
+        aria-haspopup={true}
+        aria-expanded={isOpen ? true : undefined}
         ref={labelRef}
         className="dse-select__label"
         onClick={() => onLabelClick()}
@@ -78,7 +81,13 @@ const Select: React.FunctionComponent<SelectProps> = ({
         </svg>
       </button>
       {isOpen ? (
-        <ul style={{ top: overlayTop }} className="dse-select__overlay">
+        <ul
+          role="menu"
+          aria-hidden={isOpen ? undefined : false}
+          id="dse-select-list"
+          style={{ top: overlayTop }}
+          className="dse-select__overlay"
+        >
           {options.map((option, optionIndex) => {
             const isSelected = selectedIndex === optionIndex;
 
