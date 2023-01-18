@@ -3,9 +3,11 @@ import React, { createRef, KeyboardEventHandler, useEffect, useRef, useState } f
 import Text from '../../atoms/Text';
 
 const KEY_CODES = {
-  ENTER: 13,
-  SPACE: 32,
-  DOWN_ARROW: 40,
+  ENTER: "Enter",
+  SPACE: "",
+  DOWN_ARROW: "ArrowDown",
+  ESC: "Escape",
+  UP_ARROW: "ArrowUp",
 };
 
 interface SelectOption {
@@ -25,6 +27,34 @@ interface SelectProps {
   label?: string;
   renderOption?: (props: RenderOptionProps) => React.ReactNode;
 }
+
+const getPreviousOptionIndex = (
+  currentIndex: number | null,
+  options: Array<SelectOption>
+) => {
+  if (currentIndex === null) {
+    return 0;
+  }
+
+  if (currentIndex === 0) {
+    return options.length - 1;
+  }
+
+  return currentIndex - 1;
+};
+
+const getNextOptionIndex = (
+  currentIndex: number | null,
+  options: Array<SelectOption>
+) => {
+  if (currentIndex === null) {
+    return 0;
+  }
+  if (currentIndex === options.length - 1) {
+    return 0;
+  }
+  return currentIndex + 1;
+};
 
 const Select: React.FunctionComponent<SelectProps> = ({
   options = [],
@@ -63,7 +93,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
     selectedOption = options[selectedIndex];
   }
 
-  const highlightItem = (optionIndex: number | null) => {
+  const highlightOption = (optionIndex: number | null) => {
     setHighlightedIndex(optionIndex);
   };
 
@@ -71,13 +101,13 @@ const Select: React.FunctionComponent<SelectProps> = ({
     event.preventDefault();
     if (
       [KEY_CODES.ENTER, KEY_CODES.SPACE, KEY_CODES.DOWN_ARROW].includes(
-        event.keyCode
+        event.key
       )
     ) {
       setIsOpen(true);
 
       // set focus on the list item
-      highlightItem(0);
+      highlightOption(0);
     }
   };
 
@@ -92,7 +122,27 @@ const Select: React.FunctionComponent<SelectProps> = ({
         ref.current.focus();
       }
     }
-  }, [isOpen]);
+  }, [isOpen, highlightedIndex]);
+
+  const onOptionKeyDown: KeyboardEventHandler = (event) => {
+    console.log("key down", event.key);
+    if (event.key === KEY_CODES.ESC) {
+      setIsOpen(false);
+      return;
+    }
+
+    if (event.key === KEY_CODES.DOWN_ARROW) {
+      highlightOption(getNextOptionIndex(highlightedIndex, options));
+    }
+
+    if (event.key === KEY_CODES.UP_ARROW) {
+      highlightOption(getPreviousOptionIndex(highlightedIndex, options));
+    }
+
+    if (event.key === KEY_CODES.ENTER) {
+      onOptionSelected(options[highlightedIndex!], highlightedIndex!);
+    }
+  };
 
   return (
     <div className="dse-select">
@@ -142,9 +192,13 @@ const Select: React.FunctionComponent<SelectProps> = ({
               getOptionRecommendedProps: (overrideProps = {}) => {
                 return {
                   ref,
+                  role: "menuitemradio",
+                  "aria-label": option.label,
+                  "aria-checked": isSelected ? true : undefined,
+                  onKeyDown: onOptionKeyDown,
                   tabIndex: isHighlighted ? -1 : 0,
-                  onMouseEnter: () => highlightItem(optionIndex),
-                  onMouseLeave: () => highlightItem(null),
+                  onMouseEnter: () => highlightOption(optionIndex),
+                  onMouseLeave: () => highlightOption(null),
                   className: `dse-select__option ${
                     isSelected ? "dse-select__option--selected" : ""
                   } ${isHighlighted ? "dse-select__option--highlighted" : ""}`,

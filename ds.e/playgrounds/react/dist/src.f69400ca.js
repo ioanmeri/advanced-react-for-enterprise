@@ -29103,9 +29103,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 const KEY_CODES = {
-  ENTER: 13,
-  SPACE: 32,
-  DOWN_ARROW: 40
+  ENTER: "Enter",
+  SPACE: "",
+  DOWN_ARROW: "ArrowDown",
+  ESC: "Escape",
+  UP_ARROW: "ArrowUp"
+};
+const getPreviousOptionIndex = (currentIndex, options) => {
+  if (currentIndex === null) {
+    return 0;
+  }
+  if (currentIndex === 0) {
+    return options.length - 1;
+  }
+  return currentIndex - 1;
+};
+const getNextOptionIndex = (currentIndex, options) => {
+  if (currentIndex === null) {
+    return 0;
+  }
+  if (currentIndex === options.length - 1) {
+    return 0;
+  }
+  return currentIndex + 1;
 };
 const Select = ({
   options = [],
@@ -29136,15 +29156,15 @@ const Select = ({
   if (selectedIndex !== null) {
     selectedOption = options[selectedIndex];
   }
-  const highlightItem = optionIndex => {
+  const highlightOption = optionIndex => {
     setHighlightedIndex(optionIndex);
   };
   const onButtonKeyDown = event => {
     event.preventDefault();
-    if ([KEY_CODES.ENTER, KEY_CODES.SPACE, KEY_CODES.DOWN_ARROW].includes(event.keyCode)) {
+    if ([KEY_CODES.ENTER, KEY_CODES.SPACE, KEY_CODES.DOWN_ARROW].includes(event.key)) {
       setIsOpen(true);
       // set focus on the list item
-      highlightItem(0);
+      highlightOption(0);
     }
   };
   (0, _react.useEffect)(() => {
@@ -29157,7 +29177,23 @@ const Select = ({
         ref.current.focus();
       }
     }
-  }, [isOpen]);
+  }, [isOpen, highlightedIndex]);
+  const onOptionKeyDown = event => {
+    console.log("key down", event.key);
+    if (event.key === KEY_CODES.ESC) {
+      setIsOpen(false);
+      return;
+    }
+    if (event.key === KEY_CODES.DOWN_ARROW) {
+      highlightOption(getNextOptionIndex(highlightedIndex, options));
+    }
+    if (event.key === KEY_CODES.UP_ARROW) {
+      highlightOption(getPreviousOptionIndex(highlightedIndex, options));
+    }
+    if (event.key === KEY_CODES.ENTER) {
+      onOptionSelected(options[highlightedIndex], highlightedIndex);
+    }
+  };
   return _react.default.createElement("div", {
     className: "dse-select"
   }, _react.default.createElement("button", {
@@ -29198,9 +29234,13 @@ const Select = ({
       getOptionRecommendedProps: (overrideProps = {}) => {
         return {
           ref,
+          role: "menuitemradio",
+          "aria-label": option.label,
+          "aria-checked": isSelected ? true : undefined,
+          onKeyDown: onOptionKeyDown,
           tabIndex: isHighlighted ? -1 : 0,
-          onMouseEnter: () => highlightItem(optionIndex),
-          onMouseLeave: () => highlightItem(null),
+          onMouseEnter: () => highlightOption(optionIndex),
+          onMouseLeave: () => highlightOption(null),
           className: `dse-select__option ${isSelected ? "dse-select__option--selected" : ""} ${isHighlighted ? "dse-select__option--highlighted" : ""}`,
           key: option.value,
           onClick: () => onOptionSelected(option, optionIndex),
