@@ -936,7 +936,7 @@ template {
   box-sizing: border-box;
 }
 
-.dse-select__option:hover {
+.dse-select__option--highlighted {
   background-color: var(--dse-form-bg-color-cover, #f1f2f3);
 }
 
