@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "yarn build -w"
+    "dev": "yarn build -w",
+    "test": "jest --verbose"
   }
 }
