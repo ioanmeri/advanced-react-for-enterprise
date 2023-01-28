@@ -73,3 +73,59 @@ yarn add @ds.e/scss @ds.e/foundation @ds.e/react
 ```
 
 ---
+
+## Conventional commits
+
+Follow a specific commit format and dynamically generate a change log
+
+Based on **Angular Team**:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+type:
+
+- feature
+- fix
+- breaking change
+
+[optional scope]:
+
+- specific package in the mono repository
+- dev ops
+- documentation
+
+description:
+
+- a small description of the change you've made
+
+[optional body]:
+
+- a full description of the changes you've made
+
+[optional footer]:
+
+- might contains some meta information, e.g. issue number
+
+---
+
+Add packages **commitizen** and **cz-conventional-changelog**
+
+Add script for commit via cli
+
+```
+"commit": "yarn git-cz"
+```
+
+```
+"config": {
+  "commitizen": {
+    "path": "cz-conventional-changelog"
+  }
+},
+```
