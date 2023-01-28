@@ -45,3 +45,31 @@ Changes:
 - @playgrounds/react: 1.0.0 => 0.1.0 (private)
 
 When git remote origin is connected, in git a new tag `v0.1.0` is added
+
+---
+
+## Control published files
+
+In `package.json` add files block which is a white list of the published files to npm:
+
+```
+  "files": [
+    "lib"
+  ],
+```
+
+Important to gitignore `lib/*` so that we do not push compiled code to github.
+
+We want to push the **src code to github** and then we can **compile and publish to npm** (src will be completed ignored)
+
+---
+
+### Test
+
+Create a new project `npm init -y` and add the packages:
+
+```
+yarn add @ds.e/scss @ds.e/foundation @ds.e/react
+```
+
+---

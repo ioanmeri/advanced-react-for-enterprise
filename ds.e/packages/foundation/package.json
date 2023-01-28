@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "lib/index.js",
   "license": "MIT",
+  "files": [
+    "lib"
+  ],
   "devDependencies": {
     "typescript": "^4.9.4"
   },
