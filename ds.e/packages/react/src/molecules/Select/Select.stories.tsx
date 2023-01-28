@@ -1,8 +1,10 @@
-import '@ds.e/scss/lib/Select.css';
+import "@ds.e/scss/lib/Select.css";
 
-import React from 'react';
+import React from "react";
 
-import Select from './Select';
+import { withA11y } from "@storybook/addon-a11y";
+
+import Select from "./Select";
 
 const options = [
   { label: "Strict Black", value: "black" },
@@ -12,6 +14,7 @@ const options = [
 
 export default {
   title: "Molecules|Select",
+  decorators: [withA11y],
 };
 
 export const Common = () => <Select options={options} />;

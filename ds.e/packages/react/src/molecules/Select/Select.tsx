@@ -1,6 +1,12 @@
-import React, { createRef, KeyboardEventHandler, useEffect, useRef, useState } from 'react';
+import React, {
+  createRef,
+  KeyboardEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
-import Text from '../../atoms/Text';
+import Text from "../../atoms/Text";
 
 const KEY_CODES = {
   ENTER: "Enter",
@@ -173,13 +179,15 @@ const Select: React.FunctionComponent<SelectProps> = ({
           <path d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {isOpen ? (
+      {
         <ul
           role="menu"
           aria-hidden={isOpen ? undefined : false}
           id="dse-select-list"
           style={{ top: overlayTop }}
-          className="dse-select__overlay"
+          className={`dse-select__overlay ${
+            isOpen ? "dse-select__overlay--open" : ""
+          }`}
         >
           {options.map((option, optionIndex) => {
             const isSelected = selectedIndex === optionIndex;
@@ -239,7 +247,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
             );
           })}
         </ul>
-      ) : null}
+      }
     </div>
   );
 };
