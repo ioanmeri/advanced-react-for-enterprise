@@ -112,11 +112,11 @@ description:
 
 - might contains some meta information, e.g. issue number
 
----
+**Installation**
 
-Add packages **commitizen** and **cz-conventional-changelog**
+- Add packages **commitizen** and **cz-conventional-changelog**
 
-Add script for commit via cli
+- Add script for commit via cli
 
 ```
 "commit": "yarn git-cz"
@@ -129,3 +129,45 @@ Add script for commit via cli
   }
 },
 ```
+
+---
+
+## Lint commits
+
+We have a `yarn commit` command but someone could still make a mistake. We can add linting for our commit messages. That way when the user commits, there is a hook that checks the message of the commit to make sure it follows conventions.
+
+**Packages needed**
+
+```
+yarn add --dev @commitlint/
+cli @commitlint/config-conventional husky -W
+```
+
+**husky** to run the commit lint on a specific hook.
+
+**Installation**
+
+Add `commitlint.config.js`
+
+```
+module.exports = {
+  extends: ["@commitlint/config-conventional"],
+};
+
+```
+
+In `package.json` add:
+
+```
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+```
+
+Husky listens to the commit message hook and run commitlint on the commit that the user wrote.
+
+So all of the commits can follow the same convention called **conventional commits**
+
+---

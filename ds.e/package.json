@@ -10,11 +10,6 @@
     "publish": "yarn test && yarn build && yarn lerna publish",
     "commit": "yarn git-cz"
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -29,6 +24,19 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "husky": "^8.0.3",
     "lerna": "^6.4.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
