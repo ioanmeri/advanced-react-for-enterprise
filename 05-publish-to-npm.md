@@ -171,3 +171,33 @@ Husky listens to the commit message hook and run commitlint on the commit that t
 So all of the commits can follow the same convention called **conventional commits**
 
 ---
+
+## Generate changelogs with lerna
+
+Add in `lerna.json`:
+
+```
+"command": {
+  "publish": {
+    "conventionalCommits": true
+  }
+}
+```
+
+this generates a `CHANGELOG.md` document at the root of the project with all changes documented and the commits associated with these changes.
+
+Also, each package has it's own `CHANGELOG.md` too, with a list of changes for each package.
+
+---
+
+## Review
+
+- First, there is the **conventional commits** to write commits in a specific way
+- To follow that convention, we used a package called **commitizen**, which has a simple **cli** that we can follow and generate the commits message for us
+- we also installed **@commitlint/cli** and **@commitlint/config-conventional** to configure it to follow the conventional commits format
+- commitlint is going to use **husky** to run a linting command after a user typed in the commit message and if it does not match the expectation then will throw an error
+- when it's time to publish, we've told lerna to follow **conventionalCommits** so it's going to check the commit and will know:
+  - what type of change it is automatically
+  - it's going to generate a **CHANGELOG.md**
+
+---
